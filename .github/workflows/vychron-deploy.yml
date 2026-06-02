@@ -1,0 +1,29 @@
+name: vychron-deploy-amplify
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: ['*']
+
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Print deployment intent
+        run: |
+          echo 'App: test'
+          echo 'Cloud: AWS'
+          echo 'Model: Amplify'
+          echo 'Region: us-east-1'
+          echo 'PR merge policy: later'
+
+  deploy:
+    needs: plan
+    runs-on: ubuntu-latest
+    if: github.event_name == 'workflow_dispatch'
+    steps:
+      - uses: actions/checkout@v4
+      - name: Deployment placeholder
+        run: |
+          echo 'Execute Amplify deployment for AWS (us-east-1)'
